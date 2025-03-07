@@ -10,6 +10,16 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def login
+    result = UserService.login(params[:email], params[:password])
+    if result[:success]
+      render json: { message: 'Login successful', user: result[:user], token: result[:token] }, status: :ok
+    else
+      render json: { errors: result[:error] }, status: :unauthorized
+    end
+  end
+
+
   private 
 
   def user_params

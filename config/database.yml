@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  port: 5432
+  username: postgres
+  password: 9119
+  pool: 5
+
+development:
+  <<: *default
+  database: bookstore_backend_database
+
+test:
+  <<: *default
+  database: bookstore_backend_test
+
+production:
+  <<: *default
+  database: my_project_production
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
